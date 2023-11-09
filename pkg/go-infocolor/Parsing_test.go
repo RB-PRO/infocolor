@@ -40,3 +40,26 @@ func TestListsCountOfColors(t *testing.T) {
 	fmt.Println(ListsCountOfColors(15))
 	fmt.Println(ListsCountOfColors(0))
 }
+
+func TestParseColor(t *testing.T) {
+	bz, ErrBZ := NewBrauzer()
+	if ErrBZ != nil {
+		t.Error(ErrBZ)
+	}
+	defer bz.Close()
+
+	ErrAUF := bz.Authorization("Stepice", "Karen1986")
+	if ErrAUF != nil {
+		t.Error(ErrAUF)
+	}
+
+	ColorUrl := "https://infocolor.ru/formuls/index.php?ROOT_SECTION_ID=2&color_system=Spies%20Hecker&paint_code=078&company=LEXUS&training_centre=true&COLOR_NAME=078"
+	color, ErrColor := bz.ParseColor(ColorUrl)
+	if ErrColor != nil {
+		t.Error(ErrColor)
+	}
+
+	// Вывод
+	fmt.Println(SprintColorForm(color))
+
+}

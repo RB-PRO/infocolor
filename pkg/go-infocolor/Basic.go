@@ -25,6 +25,7 @@ type Color struct {
 // Формула цвета
 // Одновременно содержит возможную информацию по конкретной формуле
 // и всё, что с ней связано
+// Это одна строка в таблице с красной шапкой
 type ColorForm struct {
 	Info ColorInfo // Информация по цвету
 
@@ -49,27 +50,30 @@ type ColorForm struct {
 	Autor string // Автор формулы
 	// Дата добавления формулы
 
-	Comments []Comment
+	// Формулы цветов и всё, Что с ними связано
+	Rec []Recipe
 }
 
-// Комментарий к ColorForm
+// Рецепт цвета, может иметь несколько слоёв
+type Recipe struct {
+	LayerNumber int       // Номер слоя
+	Formuls     []Formula // Компоненты
+	Note        string    // Примечание
+	Coast       float64   // Сумма
+	Comments    []Comment // Комментарии к формуле
+}
+
+// Комментарий к формуле цвета
 type Comment struct {
 	Autor   string
 	Message string
 	Data    time.Time
 }
 
-// Рецепт цвета, может иметь несколько слоёв
-type Recipe struct {
-	LayerNumber int       // Номер слоя
-	Formuls     []Formula // Формулы
-	Note        string    // Примечание
-	Coast       float64   // Сумма
-}
-
 // Формула цвета такая сложность поля связана с тем, что может быть несколько формул
 type Formula struct {
-	Code   string // Код компонента
-	Name   string // Название компонента
-	Weight string // Кол-во в (г), чтобы получился выбранный объем
+	Code      string  // Код компонента
+	Name      string  // Название компонента
+	Weight    float64 // Вес (г) исходные значения
+	CapWeight float64 // Кол-во в (г), чтобы получился выбранный объем
 }
