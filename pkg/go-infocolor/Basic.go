@@ -20,6 +20,7 @@ type Color struct {
 	Note string    // Примечание
 	Link string    // Ссылка на цвет
 	Type string    // Тип: "Официальные", "Уч. центра", "Колористов"
+	CF   []ColorForm
 }
 
 // Формула цвета
