@@ -65,7 +65,7 @@ func (bz *Brauzer) ParseColor(link string) (color []ColorForm, err error) {
 			val, _ := Col.InnerText()
 			val = strings.TrimSpace(val)
 			if val != "" {
-				ColName[iCol+1] = editStr(val)
+				ColName[iCol+1] = EditStr(val)
 			}
 		}
 	}
@@ -278,7 +278,7 @@ func (bz *Brauzer) collumnNameItem(Item playwright.ElementHandle) (map[int]strin
 			val, _ := Col.InnerText()
 			val = strings.TrimSpace(val)
 			if val != "" {
-				ColNameItem[iCol+1] = editStr(val)
+				ColNameItem[iCol+1] = EditStr(val)
 			}
 		}
 	}
@@ -286,7 +286,7 @@ func (bz *Brauzer) collumnNameItem(Item playwright.ElementHandle) (map[int]strin
 }
 
 // Редактировать строку, приводя её к стандартному типу
-func editStr(str string) string {
+func EditStr(str string) string {
 	str = strings.ReplaceAll(str, " ", "")
 	str = strings.ReplaceAll(str, "_", "")
 	str = strings.ReplaceAll(str, "-", "")

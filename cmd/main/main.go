@@ -1,7 +1,13 @@
 package main
 
-import ParserInfoColor "github.com/RB-PRO/infocolor/internal/ParserInfoColor"
+import (
+	ParserInfoColor "github.com/RB-PRO/infocolor/internal/ParserInfoColor"
+)
 
 func main() {
-	ParserInfoColor.Start()
+	// parsecolorfactory.Parsing()
+
+	// ParserInfoColor.Start()
+	ParserInfoColor.MobileStart()
+	// ParserInfoColor.MobileStart2()
 }

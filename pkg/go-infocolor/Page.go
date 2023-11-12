@@ -94,6 +94,7 @@ func (bb *Brauzer) ParsePage(brand string, types string, page int) (CC []Color, 
 		CouterListStr, _ := List.InnerText()
 		CouterListStr = strings.ReplaceAll(CouterListStr, "Официальные", "")
 		CouterListStr = strings.ReplaceAll(CouterListStr, "Уч. центра", "")
+		CouterListStr = strings.ReplaceAll(CouterListStr, "Уч.центра", "")
 		CouterListStr = strings.ReplaceAll(CouterListStr, "Колористов", "")
 		CouterListStr = strings.ReplaceAll(CouterListStr, "(", "")
 		CouterListStr = strings.ReplaceAll(CouterListStr, ")", "")

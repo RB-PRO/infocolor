@@ -12,7 +12,7 @@ func TestPage(t *testing.T) {
 	}
 	defer bz.Close()
 
-	ErrAUF := bz.Authorization("Stepice", "Karen1986")
+	ErrAUF := bz.Authorization("log", "pass")
 	if ErrAUF != nil {
 		t.Error(ErrAUF)
 	}
@@ -57,4 +57,5 @@ func TestParseColor(t *testing.T) {
 		t.Error(ErrColor)
 	}
 	fmt.Println(SprintColorForm(color)) // Вывод
+	SaveJson("test.json", []Color{{CF: color}})
 }
