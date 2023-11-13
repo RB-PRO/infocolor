@@ -15,7 +15,7 @@ import (
 )
 
 func MobileStart() {
-	ColorCodes, ErrColorFactory := LoadConfig("colorfactory.json")
+	ColorCodes, ErrColorFactory := LoadConfig("lifan_2.json") // colorfactory
 	if ErrColorFactory != nil {
 		panic(ErrColorFactory)
 	}
@@ -41,6 +41,8 @@ func MobileStart() {
 			// Если бренды совпали
 			Brand = goinfocolor.EditStr(Brand)
 			ColorCode.Brand = goinfocolor.EditStr(ColorCode.Brand)
+			// Brand = "tagaz"
+			// ColorCode.Brand = "tagaz"
 			if (strings.Contains(Brand, ColorCode.Brand) ||
 				strings.Contains(ColorCode.Brand, Brand)) &&
 				(len(Brand)/2 < len(ColorCode.Brand)) &&

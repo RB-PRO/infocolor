@@ -71,9 +71,13 @@ type Formulass struct {
 
 func GetFormulasGroupByPaintCode(SectionID int, company, paintcode string) (formula FormulasGroupByPaintCode, Err error) {
 
+	// request := FormulasGroupByPaintCodeReq{
+	// 	SectionID: SectionID, Company: company, PaintCode: paintcode,
+	// 	ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
+	// }
 	request := FormulasGroupByPaintCodeReq{
-		SectionID: SectionID, Company: company, PaintCode: paintcode,
-		ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
+		SectionID: SectionID, Company: company, PaintCode: "",
+		ColorSystem: "Spies Hecker", Name: paintcode, WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
 	}
 	BytePayLoad, ErrMarshal := json.Marshal(request)
 	if ErrMarshal != nil {
@@ -89,7 +93,6 @@ func GetFormulasGroupByPaintCode(SectionID int, company, paintcode string) (form
 	}
 
 	// Добавляем необходимые атрибуты
-
 	req.Header.Add("Accept", "application/json, text/plain, */*")
 	req.Header.Add("Accept-Language", "ru,en;q=0.9,lt;q=0.8,it;q=0.7")
 	req.Header.Add("Connection", "keep-alive")

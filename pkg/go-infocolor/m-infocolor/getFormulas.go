@@ -28,9 +28,13 @@ type Formulas struct {
 
 func GetFormulas(company, paintcode string) (formulas []Formulas, Err error) {
 
+	// request := FormulasReq{
+	// 	Company: company, PaintCode: paintcode,
+	// 	ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "",
+	// }
 	request := FormulasReq{
-		Company: company, PaintCode: paintcode,
-		ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "",
+		Company: company, PaintCode: "",
+		ColorSystem: "Spies Hecker", Name: paintcode, WTCode: "", CardReference: "",
 	}
 	BytePayLoad, ErrMarshal := json.Marshal(request)
 	if ErrMarshal != nil {
