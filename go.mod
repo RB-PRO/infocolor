@@ -5,6 +5,7 @@ go 1.21.3
 require (
 	github.com/cheggaaa/pb v1.0.29
 	github.com/gocolly/colly v1.2.0
+	github.com/jedib0t/go-pretty/v6 v6.4.9
 	github.com/playwright-community/playwright-go v0.3900.1
 )
 
@@ -21,7 +22,8 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
-	github.com/mattn/go-runewidth v0.0.4 // indirect
+	github.com/mattn/go-runewidth v0.0.13 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

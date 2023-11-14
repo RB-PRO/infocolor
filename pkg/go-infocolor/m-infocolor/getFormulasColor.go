@@ -29,44 +29,94 @@ type FormulasGroupByPaintCode struct {
 		Selected bool   `json:"selected"`
 	} `json:"formulasByTypeFormulaList"`
 }
+
+//	type Formulass struct {
+//		Type        int    `json:"type"` // Тип этой формлуе офф, уч, кал
+//		ID          string `json:"id"`
+//		Company     string `json:"company"`
+//		PaintCode   string `json:"paint_code"`
+//		Name        string `json:"NAME"`
+//		CoatOfPaint []any  `json:"coatOfPaint"`
+//		Fields      []struct {
+//			Text  string `json:"text"`
+//			Value string `json:"value"`
+//		} `json:"fields"`
+//		Components []struct {
+//			Code              string  `json:"code"`
+//			CodeDisplay       string  `json:"codeDisplay"`
+//			Name              string  `json:"name"`
+//			Weight            string  `json:"weight"`
+//			WeightDisplay     float64 `json:"weightDisplay"`
+//			WeightDisplayInit float64 `json:"weightDisplayInit"`
+//		} `json:"components"`
+//		ComponentsPriceInfo struct {
+//			Currency string `json:"currency"`
+//			Discount int    `json:"discount"`
+//		} `json:"componentsPriceInfo,omitempty"`
+//		ComponentsPrice []struct {
+//			Name     string `json:"NAME"`
+//			Currency string `json:"CURRENCY"`
+//			Density  string `json:"DENSITY"`
+//			Rate     string `json:"RATE"`
+//			Price    string `json:"PRICE"`
+//		} `json:"componentsPrice,omitempty"`
+//		Commentaries []any  `json:"commentaries"`
+//		Quantity     string `json:"quantity"`
+//		Thinning     string `json:"thinning"`
+//		Unit         string `json:"unit"`
+//		UnitSource   string `json:"unitSource"`
+//		Price        string `json:"price"`
+//		PriceLabel   string `json:"priceLabel"`
+//		Sum          string `json:"sum"`
+//	}
 type Formulass struct {
-	Type        int    `json:"type"` // Тип этой формлуе офф, уч, кал
-	ID          string `json:"id"`
-	Company     string `json:"company"`
-	PaintCode   string `json:"paint_code"`
-	Name        string `json:"NAME"`
-	CoatOfPaint []any  `json:"coatOfPaint"`
-	Fields      []struct {
-		Text  string `json:"text"`
-		Value string `json:"value"`
-	} `json:"fields"`
-	Components []struct {
-		Code              string  `json:"code"`
-		CodeDisplay       string  `json:"codeDisplay"`
-		Name              string  `json:"name"`
-		Weight            string  `json:"weight"`
-		WeightDisplay     float64 `json:"weightDisplay"`
-		WeightDisplayInit float64 `json:"weightDisplayInit"`
-	} `json:"components"`
-	ComponentsPriceInfo struct {
-		Currency string `json:"currency"`
-		Discount int    `json:"discount"`
-	} `json:"componentsPriceInfo,omitempty"`
-	ComponentsPrice []struct {
-		Name     string `json:"NAME"`
-		Currency string `json:"CURRENCY"`
-		Density  string `json:"DENSITY"`
-		Rate     string `json:"RATE"`
-		Price    string `json:"PRICE"`
-	} `json:"componentsPrice,omitempty"`
-	Commentaries []any  `json:"commentaries"`
-	Quantity     string `json:"quantity"`
-	Thinning     string `json:"thinning"`
-	Unit         string `json:"unit"`
-	UnitSource   string `json:"unitSource"`
-	Price        string `json:"price"`
-	PriceLabel   string `json:"priceLabel"`
-	Sum          string `json:"sum"`
+	Type                int                 `json:"type"`
+	ID                  string              `json:"id"`
+	Company             string              `json:"company"`
+	PaintCode           string              `json:"paint_code"`
+	Name                string              `json:"NAME"`
+	CoatOfPaint         []any               `json:"coatOfPaint"`
+	Fields              []Fields            `json:"fields"`
+	Components          []Components        `json:"components"`
+	ComponentsPriceInfo ComponentsPriceInfo `json:"componentsPriceInfo"`
+	ComponentsPrice     []ComponentsPrice   `json:"componentsPrice,omitempty"`
+	Commentaries        []Commentaries      `json:"commentaries"`
+	Quantity            string              `json:"quantity"`
+	Thinning            string              `json:"thinning"`
+	Unit                string              `json:"unit"`
+	UnitSource          string              `json:"unitSource"`
+	Price               string              `json:"price"`
+	PriceLabel          string              `json:"priceLabel"`
+	Sum                 string              `json:"sum"`
+}
+type Fields struct {
+	Text  string `json:"text"`
+	Value string `json:"value"`
+}
+type Components struct {
+	Code              string  `json:"code"`
+	CodeDisplay       string  `json:"codeDisplay"`
+	Name              string  `json:"name"`
+	Weight            string  `json:"weight"`
+	WeightDisplay     float64 `json:"weightDisplay"`
+	WeightDisplayInit float64 `json:"weightDisplayInit"`
+}
+
+type ComponentsPriceInfo struct {
+	Currency string `json:"currency"`
+	Discount int    `json:"discount"`
+}
+type ComponentsPrice struct {
+	Name     string `json:"NAME"`
+	Currency string `json:"CURRENCY"`
+	Density  string `json:"DENSITY"`
+	Rate     string `json:"RATE"`
+	Price    string `json:"PRICE"`
+}
+type Commentaries struct {
+	Date string `json:"date"`
+	Text string `json:"text"`
+	User string `json:"user"`
 }
 
 func GetFormulasGroupByPaintCode(SectionID int, company, paintcode string) (formula FormulasGroupByPaintCode, Err error) {
