@@ -121,14 +121,14 @@ type Commentaries struct {
 
 func GetFormulasGroupByPaintCode(SectionID int, company, paintcode string) (formula FormulasGroupByPaintCode, Err error) {
 
-	// request := FormulasGroupByPaintCodeReq{
-	// 	SectionID: SectionID, Company: company, PaintCode: paintcode,
-	// 	ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
-	// }
 	request := FormulasGroupByPaintCodeReq{
-		SectionID: SectionID, Company: company, PaintCode: "",
-		ColorSystem: "Spies Hecker", Name: paintcode, WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
+		SectionID: SectionID, Company: company, PaintCode: paintcode,
+		ColorSystem: "Spies Hecker", Name: "", WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
 	}
+	// request := FormulasGroupByPaintCodeReq{
+	// 	SectionID: SectionID, Company: company, PaintCode: "",
+	// 	ColorSystem: "Spies Hecker", Name: paintcode, WTCode: "", CardReference: "", GetFormulasByTypeFormulaList: true,
+	// }
 	BytePayLoad, ErrMarshal := json.Marshal(request)
 	if ErrMarshal != nil {
 		return FormulasGroupByPaintCode{}, fmt.Errorf("json.Marshal: %v", ErrMarshal)
@@ -153,7 +153,7 @@ func GetFormulasGroupByPaintCode(SectionID int, company, paintcode string) (form
 	req.Header.Add("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.837 Mobile Safari/537.36")
 
 	// Выполнить запрос
-	client := &http.Client{Timeout: time.Second * 300}
+	client := &http.Client{Timeout: time.Second * 5}
 	res, Err := client.Do(req)
 	if Err != nil {
 		return FormulasGroupByPaintCode{}, fmt.Errorf("client.Do: %v", Err)

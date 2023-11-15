@@ -15,7 +15,7 @@ import (
 )
 
 func MobileStart() {
-	ColorCodes, ErrColorFactory := LoadConfig("lifan_2.json") // colorfactory
+	ColorCodes, ErrColorFactory := LoadConfig("colorfactory.json") // colorfactory
 	if ErrColorFactory != nil {
 		panic(ErrColorFactory)
 	}
@@ -41,8 +41,6 @@ func MobileStart() {
 			// Если бренды совпали
 			Brand = goinfocolor.EditStr(Brand)
 			ColorCode.Brand = goinfocolor.EditStr(ColorCode.Brand)
-			// Brand = "tagaz"
-			// ColorCode.Brand = "tagaz"
 			if (strings.Contains(Brand, ColorCode.Brand) ||
 				strings.Contains(ColorCode.Brand, Brand)) &&
 				(len(Brand)/2 < len(ColorCode.Brand)) &&
@@ -53,17 +51,17 @@ func MobileStart() {
 				Bar := pb.StartNew(len(ColorCode.ColorsCode))
 				Bar.Prefix(Brand)
 				for _, paintcode := range ColorCode.ColorsCode {
-					var formuls []minfocolor.Formulas
 					for {
-						var ErrGetFormulas error
-						formuls, ErrGetFormulas = minfocolor.GetFormulas(Brand, paintcode)
-						if ErrGetFormulas != nil {
-							log.Printf("minfocolor.GetFormulas: %v", ErrGetFormulas)
-							continue
-						}
+						// formuls, ErrGetFormulas := minfocolor.GetFormulas(Brand, paintcode)
+						// if ErrGetFormulas != nil {
+						// 	log.Printf("minfocolor.GetFormulas: %v", ErrGetFormulas)
+						// 	continue
+						// }
 
-						for _, formul := range formuls {
-							formula, ErrFormula := minfocolor.GetFormulasGroupByPaintCode(formul.ID, Brand, paintcode)
+						formulIDs := []int{2, 3, 4}
+						// for _, formul := range formuls {
+						for _, formul := range formulIDs {
+							formula, ErrFormula := minfocolor.GetFormulasGroupByPaintCode(formul, Brand, paintcode)
 							if ErrFormula != nil {
 								log.Printf("minfocolor.GetFormulasGroupByPaintCode: %v", ErrFormula)
 							}

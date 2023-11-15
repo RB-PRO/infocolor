@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/RB-PRO/infocolor/internal/gui"
+	gui "github.com/RB-PRO/infocolor/internal/gui"
 )
 
 func main() {
