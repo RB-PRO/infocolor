@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	minfocolor "github.com/RB-PRO/infocolor/pkg/go-infocolor/m-infocolor"
 	"github.com/jedib0t/go-pretty/v6/table"
@@ -47,6 +48,7 @@ func TableComponent(Component []minfocolor.Components) string {
 	t.SetTitle("Компоненты формулы")
 	t.SetAutoIndex(true)
 	t.Style().Format.Header = text.FormatTitle
+	t.SetStyle(table.StyleRounded)
 	t.AppendHeader(table.Row{"Code", "CodeDisplay", "Name", "Weight", "WeightDisplay", "WeightDisplayInit"})
 	for _, c := range Component {
 		t.AppendRow(table.Row{c.Code, c.CodeDisplay, c.Name, c.Weight, c.WeightDisplay, c.WeightDisplayInit})
@@ -70,15 +72,51 @@ func TableFields(Component []minfocolor.Fields) string {
 	return t.Render() + "\n"
 }
 
+// Сделать таблицу из типов цветов и указать их к-во
+func TableTypes(forms []minfocolor.Formulass) string {
+	if len(forms) == 0 {
+		return ""
+	}
+	t := table.NewWriter()
+	t.SetTitle("Типы цветов")
+	t.SetAutoIndex(true)
+	t.Style().Format.Header = text.FormatTitle
+	t.SetStyle(table.StyleRounded)
+	t.AppendHeader(table.Row{"2", "3", "4"})
+	Types := []int{2, 3, 4}
+	var Row []interface{}
+	for _, Type := range Types {
+		var count int
+		for _, form := range forms {
+			if form.Type == Type {
+				count++
+			}
+		}
+		var RowStr string
+		switch Type {
+		case 2:
+			RowStr = fmt.Sprintf("Официальный(%d)", count)
+		case 3:
+			RowStr = fmt.Sprintf("Уч. цвета(%d)", count)
+		case 4:
+			RowStr = fmt.Sprintf("Колористов(%d)", count)
+		}
+		Row = append(Row, RowStr)
+	}
+	t.AppendRow(Row)
+	return t.Render() + "\n"
+}
+
 // Сделать таблицу из компонентов цен
 func TableComponentsPrice(Component []minfocolor.ComponentsPrice) string {
 	if len(Component) == 0 {
 		return ""
 	}
 	t := table.NewWriter()
-	t.SetTitle("Аттрибуты")
+	t.SetTitle("Компоненты цены")
 	t.SetAutoIndex(true)
 	t.Style().Format.Header = text.FormatTitle
+	t.SetStyle(table.StyleRounded)
 	t.AppendHeader(table.Row{"Name", "Currency", "Density", "Rate", "Price"})
 	for _, c := range Component {
 		t.AppendRow(table.Row{c.Name, c.Currency, c.Density, c.Rate, c.Price})
@@ -95,9 +133,10 @@ func TableCommentaries(Component []minfocolor.Commentaries) string {
 	t.SetTitle("Комментарии")
 	t.SetAutoIndex(true)
 	t.Style().Format.Header = text.FormatTitle
+	t.SetStyle(table.StyleRounded)
 	t.AppendHeader(table.Row{"Date", "User", "Text"})
 	for _, c := range Component {
-		t.AppendRow(table.Row{c.Date, c.User, c.Text})
+		t.AppendRow(table.Row{c.Date, c.User, strings.ReplaceAll(c.Text, "&nbsp;", "")})
 	}
 	return t.Render() + "\n"
 }

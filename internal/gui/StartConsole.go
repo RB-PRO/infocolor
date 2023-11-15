@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 	"strings"
 
 	minfocolor "github.com/RB-PRO/infocolor/pkg/go-infocolor/m-infocolor"
@@ -15,15 +16,15 @@ import (
 
 func Start() {
 	Folder := "infocolor/"
-	fmt.Println(FileList(Folder))
 
 	for {
+		fmt.Println(FileList(Folder))
 		SpaseWait()
-		fmt.Print("Введите название файла: ")
-		File := "audi.json"
-		File = InputString()
 
-		// Formulass
+		// ::: Файл
+		fmt.Print("Введите название файла: ")
+		File := "citroen.json"
+		File = InputString()
 		Formulas, ErrLoad := LoadFile(Folder + File)
 		if ErrLoad != nil {
 			fmt.Printf("[Ошибка]: Не найден файл %s%s\n", Folder, File)
@@ -31,25 +32,45 @@ func Start() {
 		}
 		fmt.Print("\n\n\n")
 
-		// fmt.Println(len(data))
-		fmt.Println(TablesCodes(ExetCodeData(Formulas), "Коды цветов"))
+		// ::: Типы цветов
+		fmt.Println(TableTypes(Formulas))
+		fmt.Print("Введите тип цвета(2, 3 или 4)(если не хотите, то '0'): ")
+		Type := 4
+		TypeStr := InputString()
+		Type, ErrType := strconv.Atoi(TypeStr)
+		if ErrType != nil {
+			fmt.Printf("Я не распознал тип '%s', поэтому делаю сразу для всех типов\n", TypeStr)
+		}
+		if Type == 0 {
+			fmt.Println("Вы ввели '0', а значит поиск производится сразу во всех типах")
+		}
+		var FormulasType []minfocolor.Formulass
+		if Type == 2 || Type == 3 || Type == 4 {
+			FormulasType = ExetFormulaFromType(Formulas, Type)
+		} else {
+			FormulasType = Formulas
+		}
+
+		// ::: Код цвета
+		fmt.Println(TablesCodes(ExetCodeData(FormulasType), "Коды цветов"))
 		fmt.Print("Введите код цвета: ")
-		Code := "LY4S"
+		Code := "EZR"
 		Code = InputString()
 		if Code == "" {
 			PrintFormulae(Formulas)
 			continue
 		}
-		CodeFormulas := ExetFormulaFromCode(Formulas, Code)
+		CodeFormulas := ExetFormulaFromCode(FormulasType, Code)
 		if len(CodeFormulas) == 0 {
 			fmt.Printf("Не найдены формулы с кодом %s\n", Code)
 			continue
 		}
 		fmt.Print("\n\n\n")
 
+		// ::: Цвет цвета :D
 		fmt.Println(TablesCodes(ExetCodeNameData(CodeFormulas), "Названия цветов для кода "+Code))
 		fmt.Print("Введите название цвета: ")
-		Name := "SHIRAZ RED MET"
+		Name := "silver"
 		Name = InputString()
 		if Name == "" {
 			PrintFormulae(CodeFormulas)
@@ -95,6 +116,16 @@ func ExetFormulaFromName(Formulass []minfocolor.Formulass, Name string) (data []
 	return data
 }
 
+// Вытащить данные по формулам по типу формулы
+func ExetFormulaFromType(Formulass []minfocolor.Formulass, Type int) (data []minfocolor.Formulass) {
+	for _, formula := range Formulass {
+		if formula.Type == Type {
+			data = append(data, formula)
+		}
+	}
+	return data
+}
+
 // Вытащить все цвета
 func ExetCodeNameData(Formulass []minfocolor.Formulass) (Colors []string) {
 	for _, formula := range Formulass {
@@ -114,10 +145,15 @@ func TablesCodes(PaintCode []string, tytle string) string {
 	if len(PaintCode) < Cols {
 		Cols = len(PaintCode)
 	}
+	var j int
 	for i := 0; i < len(PaintCode); i += Cols {
+		j += Cols
+		if j > len(PaintCode) {
+			j = len(PaintCode)
+		}
 		Row := []interface{}{}
-		for j := 0; j < len(PaintCode[i:i+Cols]); j++ {
-			Row = append(Row, PaintCode[i : i+Cols][j])
+		for _, pc := range PaintCode[i:j] {
+			Row = append(Row, pc)
 		}
 		t.AppendRow(Row)
 	}
