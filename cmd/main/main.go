@@ -1,7 +1,7 @@
 package main
 
 import (
-	gui "github.com/RB-PRO/infocolor/internal/gui"
+	"github.com/RB-PRO/infocolor/internal/tg"
 )
 
 func main() {
@@ -11,5 +11,6 @@ func main() {
 	// ParserInfoColor.MobileStart()
 	// ParserInfoColor.MobileStart2()
 
-	gui.Start()
+	// gui.Start()
+	tg.Start()
 }

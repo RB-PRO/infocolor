@@ -4,6 +4,7 @@ go 1.21.3
 
 require (
 	github.com/cheggaaa/pb v1.0.29
+	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 	github.com/gocolly/colly v1.2.0
 	github.com/jedib0t/go-pretty/v6 v6.4.9
 	github.com/playwright-community/playwright-go v0.3900.1
