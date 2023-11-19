@@ -13,4 +13,5 @@ func main() {
 
 	// gui.Start()
 	tg.Start()
+	// settings.Couts()
 }
