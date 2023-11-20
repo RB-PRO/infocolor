@@ -18,8 +18,8 @@ func Couts() {
 	var cout int
 	for _, file := range files {
 		data, _ := LoadFile(Folder, file)
-		cout += len(data)
 		fmt.Println(file, ",", len(data))
+		cout += len(data)
 	}
 	fmt.Println(cout)
 }

@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/RB-PRO/infocolor/internal/tg"
-)
+import settings "github.com/RB-PRO/infocolor/internal/Settings"
 
 func main() {
 	// parsecolorfactory.Parsing()
@@ -12,6 +10,7 @@ func main() {
 	// ParserInfoColor.MobileStart2()
 
 	// gui.Start()
-	tg.Start()
+	// tg.Start()
 	// settings.Couts()
+	settings.FilesEnded()
 }
